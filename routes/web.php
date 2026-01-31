@@ -1,3 +1,5 @@
+<?php
+
 use App\Http\Controllers\DecisionController;
 use Illuminate\Support\Facades\Route;
 
