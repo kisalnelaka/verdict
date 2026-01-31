@@ -45,18 +45,34 @@ To ensure no one has tampered with the historical records:
 ./v verdict:verify
 ```
 
-## Testing Guide
+## Environment Setup: Valet Linux Plus
 
-### Feature Verification
-Direct testing is conducted via the provided wrapper. Note that SQLite is avoided in favor of the production-mirror MySQL driver.
+To host VERDICT locally using Valet Linux Plus:
 
-To run the core integrity tests:
+1. **Link the Project**:
+   ```bash
+   valet link verdict
+   ```
+
+2. **Database Provisioning**:
+   If you haven't already:
+   ```bash
+   valet db:create verdict
+   valet db:create verdict_test
+   ```
+
+3. **PHP Configuration**:
+   Ensure `pdo_mysql` is enabled in your Valet-managed PHP version. If you encounter "driver not found" errors in the browser, check your `php.ini` via `valet use php@8.x` (or your current version).
+
+4. **Access UI**:
+   Open [http://verdict.test](http://verdict.test) in your browser.
+
+## Testing & Verification
+Direct testing is conducted via the provided `./v` (Artisan wrapper). 
+
 ```bash
-./v test tests/Feature/LedgerIntegrityTest.php
+./v test
 ```
-
-## Security & Trust
-The ledger uses a cryptographic hash chain. If an entry is modified locally, the `verdict:verify` command will detect the break in the chain. Current implementation uses SHA-256 for the "immutable" memory.
 
 ---
 *Built with caffeine, existential dread, and a profound hatred for Jira.*
