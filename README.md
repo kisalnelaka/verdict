@@ -55,20 +55,39 @@ To host VERDICT locally using Valet Linux Plus:
    ```
 
 2. **Database Provisioning**:
-   If you haven't already:
    ```bash
-   valet db:create verdict
-   valet db:create verdict_test
+   ./v db:seed # Populate with initial intent
    ```
 
 3. **PHP Configuration**:
-   Ensure `pdo_mysql` is enabled in your Valet-managed PHP version. If you encounter "driver not found" errors in the browser, check your `php.ini` via `valet use php@8.x` (or your current version).
+   I have globally enabled `pdo_mysql` and `intl` in `/etc/php/conf.d/`. If things still look "empty," run `valet restart`.
 
 4. **Access UI**:
-   Open [http://verdict.test](http://verdict.test) in your browser.
+   Open [http://verdict.test](http://verdict.test).
+
+## Phase 2: Integrations & Enforcement
+
+VERDICT now actively monitors your implementation for "Intent Drift."
+
+### 1. Git Integration
+Link your commits to decisions by adding the decision ID in your commit messages:
+`[D1] Implementing the flux capacitor`
+
+Sync the ledger with your code:
+```bash
+./v verdict:sync-git
+```
+
+### 2. Architectural Enforcement
+VERDICT snapshots the repo structure at decision-time. If you add files without documenting the decision, the system flags it as "undocumented drift."
+
+Run enforcement (perfect for CI/CD):
+```bash
+./v verdict:enforce --strict
+```
 
 ## Testing & Verification
-Direct testing is conducted via the provided `./v` (Artisan wrapper). 
+Use the provided `./v` (Artisan wrapper) for all operations.
 
 ```bash
 ./v test

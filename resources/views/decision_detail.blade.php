@@ -48,7 +48,22 @@
             </div>
         </div>
 
-        @if($autopsies->isNotEmpty())
+        @if($decision->commitLinks->isNotEmpty())
+        <h2 style="margin-bottom: 2rem; color: var(--accent-cyber);">CODE <span>EVIDENCE</span></h2>
+        <div class="glass" style="padding: 1rem; margin-bottom: 3rem; background: rgba(0,0,0,0.1);">
+            <table style="width: 100%; border-collapse: collapse; font-family: monospace; font-size: 0.85rem;">
+                @foreach($decision->commitLinks as $link)
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 0.8rem; color: var(--accent-toxic);">{{ substr($link->commit_hash, 0, 7) }}</td>
+                        <td style="padding: 0.8rem; color: var(--text-primary);">{{ $link->message }}</td>
+                        <td style="padding: 0.8rem; color: var(--text-muted); text-align: right;">{{ $link->author }}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+    @endif
+
+    @if($autopsies->isNotEmpty())
             <h2 style="margin-bottom: 2rem; color: var(--accent-crimson);">AUTOPSY <span>REPORTS</span></h2>
             @foreach($autopsies as $report)
                 <div class="glass"

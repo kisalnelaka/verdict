@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class DecisionService
 {
-    public function __construct(protected LedgerService $ledgerService)
-    {
+    public function __construct(
+        protected LedgerService $ledgerService,
+        protected DriftService $driftService
+    ) {
     }
 
     /**
@@ -23,6 +25,7 @@ class DecisionService
             ContextSnapshot::create([
                 'decision_id' => $decision->id,
                 'data' => $contextData,
+                'architectural_state_hash' => $this->driftService->calculateStateHash(),
             ]);
 
             $this->ledgerService->record(

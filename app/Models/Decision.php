@@ -29,4 +29,9 @@ class Decision extends Model
     {
         return $this->hasMany(Outcome::class);
     }
+
+    public function commitLinks()
+    {
+        return $this->hasMany(CommitLink::class);
+    }
 }

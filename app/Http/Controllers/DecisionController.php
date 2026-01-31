@@ -22,7 +22,7 @@ class DecisionController extends Controller
 
     public function show(Decision $decision, AutopsyService $autopsyService)
     {
-        $decision->load(['snapshot', 'outcomes', 'actors']);
+        $decision->load(['snapshot', 'outcomes', 'actors', 'commitLinks', 'actors.user']);
 
         $autopsies = $decision->outcomes->map(function ($outcome) use ($autopsyService) {
             return $autopsyService->conduct($outcome);
