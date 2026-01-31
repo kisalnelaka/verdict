@@ -41,7 +41,7 @@ class GitService
                             'decision_id' => $decisionId,
                             'author' => $author,
                             'message' => $message,
-                            'committed_at' => $date,
+                            'committed_at' => \Illuminate\Support\Carbon::parse($date)->toDateTimeString(),
                         ]
                     );
 
