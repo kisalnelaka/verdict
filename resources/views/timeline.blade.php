@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="animate-fade">
-        <h1 style="margin-bottom: 2rem; font-weight: 800;">DECISION <span>TIMELINE</span></h1>
+        <h1 style="margin-bottom: 4rem; font-weight: 800; text-align: center; font-size: 3rem;">DECISION
+            <span>TIMELINE</span></h1>
 
         <div class="timeline">
             @forelse($decisions as $decision)

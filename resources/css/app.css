@@ -7,7 +7,7 @@
     --accent-crimson: #ff073a;
     --accent-cyber: #08f7fe;
     --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.08);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -23,117 +23,142 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism */
 .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    border-radius: 16px;
 }
 
-/* Layout */
-.nav-link {
-    transition: color 0.3s ease;
-    opacity: 0.7;
-}
-
-.nav-link:hover {
-    color: var(--accent-toxic) !important;
-    opacity: 1;
-}
-
+/* Layout Architecture */
 .app-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem;
 }
 
-header {
+.nav-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
     margin-bottom: 4rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    opacity: 0.6;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    opacity: 1;
+    color: var(--accent-toxic);
+}
+
+.content-area {
+    padding: 1rem 0;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+h1 span {
+    color: var(--accent-toxic);
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: 2px;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 3px;
     color: var(--text-primary);
-    text-transform: uppercase;
 }
 
 .logo span {
     color: var(--accent-toxic);
 }
 
-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-left: 2rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition);
-}
-
-nav a:hover,
-nav a.active {
-    color: var(--accent-toxic);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-}
-
-/* Timeline */
+/* Timeline Components */
 .timeline {
     position: relative;
-    padding-left: 2rem;
-    border-left: 2px solid var(--glass-border);
+    padding-left: 3rem;
+    border-left: 1px solid var(--glass-border);
+    margin-left: 1rem;
 }
 
 .decision-card {
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin-bottom: 3.5rem;
+    padding: 2.5rem;
     position: relative;
     transition: var(--transition);
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .decision-card:hover {
-    border-color: var(--accent-cyber);
-    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(57, 255, 20, 0.3);
+    transform: translateY(-5px);
 }
 
 .decision-card::before {
     content: '';
     position: absolute;
-    left: -2.6rem;
-    top: 2rem;
-    width: 1rem;
-    height: 1rem;
+    left: -3.65rem;
+    top: 2.5rem;
+    width: 12px;
+    height: 12px;
     background: var(--bg-deep);
     border: 2px solid var(--accent-toxic);
     border-radius: 50%;
     z-index: 10;
+    box-shadow: 0 0 10px var(--accent-toxic);
 }
 
 .decision-meta {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
+/* Badges */
 .badge {
-    padding: 0.2rem 0.6rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 4px;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    font-size: 0.7rem;
+    display: inline-block;
+}
+
+.badge-arch {
+    border: 1px solid var(--accent-crimson);
+    color: var(--accent-crimson);
 }
 
 .badge-tech {
@@ -146,16 +171,47 @@ nav a.active {
     color: var(--accent-toxic);
 }
 
-.badge-arch {
-    border: 1px solid var(--accent-crimson);
-    color: var(--accent-crimson);
+/* Alerts */
+.alert {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: var(--accent-toxic);
+    color: #000;
+    border-color: var(--accent-toxic);
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+}
+
+.btn-new {
+    border-color: var(--accent-toxic);
+    color: var(--accent-toxic);
 }
 
 /* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
 
     to {
@@ -165,24 +221,10 @@ nav a.active {
 }
 
 .animate-fade {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Buttons */
-.btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    background: var(--glass-bg);
-    color: var(--text-primary);
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-    border: 1px solid var(--glass-border);
-}
-
-.btn:hover {
-    background: var(--accent-toxic);
-    color: var(--bg-deep);
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+/* Utility */
+.monospace {
+    font-family: 'JetBrains Mono', monospace;
 }

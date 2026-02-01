@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="animate-fade">
-        <h1 style="margin-bottom: 2rem; font-weight: 800;">SYSTEM <span>COCKPIT</span></h1>
+        <h1 style="margin-bottom: 4rem; font-weight: 800; text-align: center; font-size: 3rem;">SYSTEM <span>COCKPIT</span>
+        </h1>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
             <div class="glass" style="padding: 2.5rem;">

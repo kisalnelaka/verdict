@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="animate-fade" style="max-width: 800px; margin: 0 auto;">
-        <h1 style="margin-bottom: 2rem; font-weight: 800;">COMMIT <span>INTENT</span></h1>
+        <h1 style="margin-bottom: 3rem; font-weight: 800; text-align: center; font-size: 3rem;">COMMIT <span>INTENT</span>
+        </h1>
 
         <div class="glass" style="padding: 3rem;">
             <form action="{{ route('decisions.store') }}" method="POST">

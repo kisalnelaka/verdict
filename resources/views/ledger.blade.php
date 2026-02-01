@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="animate-fade">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
-            <h1 style="font-weight: 800;">ACCOUNTABILITY <span>LEDGER</span></h1>
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <h1 style="font-weight: 800; font-size: 3rem; margin-bottom: 1rem;">ACCOUNTABILITY <span>LEDGER</span></h1>
             <div class="glass"
-                style="padding: 0.5rem 1.5rem; border-color: {{ $isValid ? 'var(--accent-toxic)' : 'var(--accent-crimson)' }};">
+                style="display: inline-block; padding: 0.5rem 1.5rem; border-color: {{ $isValid ? 'var(--accent-toxic)' : 'var(--accent-crimson)' }};">
                 STATUS: <strong
                     style="color: {{ $isValid ? 'var(--accent-toxic)' : 'var(--accent-crimson)' }}">{{ $isValid ? 'VERIFIED' : 'COMPROMISED' }}</strong>
             </div>
