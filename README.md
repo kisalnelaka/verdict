@@ -22,6 +22,12 @@ VERDICT is cognitive infrastructure for engineering governance. It exists to ans
 - **Context Inspection**: Deep-dive views into decision snapshots and the cryptographic chain.
 - **Evidence UI**: Direct visualization of linked code changes and architectural drift.
 
+### Phase 4: Advanced Governance & Intelligence
+- **CI/CD Enforcement**: `./v verdict:enforce --strict` ensures every decision has implementation evidence.
+- **Cognitive UI**: A premium dark-mode interface for visualizing the architectural timeline.
+- **UI Governance**: Replaces CLI commands with a web-based **System Cockpit** for Git Sync, Enforcement, and Ledger Verification.
+- **Actor Intelligence**: Tracks the "Wisdom Index" and career trajectories of all architectural actors.
+
 ### Phase 2: Implementation & Enforcement
 - **Git Linker**: Automatically associates commits with decisions using `[D#]` tags in commit messages.
 - **Architectural Hashing**: Snapshots the repository's directory/file structure at decision-time to detect undocumented evolution.

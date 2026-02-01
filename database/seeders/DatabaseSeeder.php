@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $ledgerService = new LedgerService();
-        $decisionService = new DecisionService($ledgerService);
+        $driftService = new \App\Services\DriftService();
+        $decisionService = new DecisionService($ledgerService, $driftService);
 
         $user = User::firstOrCreate(['email' => 'admin@verdict.internal'], [
             'name' => 'Systems Architect',

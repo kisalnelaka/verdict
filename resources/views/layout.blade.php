@@ -17,20 +17,12 @@
 </head>
 
 <body>
-    <div class="app-container">
-        <header class="animate-fade">
-            <div class="logo">VER<span>DICT</span></div>
-            <nav>
-                <a href="{{ route('timeline') }}"
-                    class="{{ request()->routeIs('timeline') ? 'active' : '' }}">Timeline</a>
-                <a href="{{ route('ledger') }}" class="{{ request()->routeIs('ledger') ? 'active' : '' }}">Memory</a>
-                <a href="#" style="opacity: 0.5; cursor: not-allowed;">Integrations</a>
-            </nav>
-        </header>
+    </nav>
+    </header>
 
-        <main>
-            @yield('content')
-        </main>
+    <main>
+        @yield('content')
+    </main>
     </div>
 
     <script>

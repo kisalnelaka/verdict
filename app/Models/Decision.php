@@ -34,4 +34,9 @@ class Decision extends Model
     {
         return $this->hasMany(CommitLink::class);
     }
+
+    public function energyEvents()
+    {
+        return $this->hasMany(EnergyEvent::class);
+    }
 }

@@ -11,28 +11,18 @@ class DriftService
      */
     public function calculateStateHash(): string
     {
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(base_path(), \RecursiveDirectoryIterator::SKIP_DOTS)
-        );
+        $finder = new \Symfony\Component\Finder\Finder();
+        $finder->files()
+            ->in(base_path())
+            ->exclude(['.git', 'vendor', 'storage', 'node_modules', '.agent', 'brain'])
+            ->sortByName();
 
-        $files = [];
-        $excludes = ['.git', 'vendor', 'storage', 'node_modules', '.agent', 'brain'];
-
-        foreach ($iterator as $file) {
-            $path = $file->getRelativePathname();
-
-            // Filter out excludes
-            foreach ($excludes as $exclude) {
-                if (str_starts_with($path, $exclude))
-                    continue 2;
-            }
-
-            // We hash path and modification time for a "cheap" drift detection
-            $files[] = $path . $file->getMTime();
+        $hashBasis = [];
+        foreach ($finder as $file) {
+            $hashBasis[] = $file->getRelativePathname() . $file->getMTime();
         }
 
-        sort($files);
-        return hash('sha256', implode('|', $files));
+        return hash('sha256', implode('|', $hashBasis));
     }
 
     /**

@@ -35,6 +35,16 @@ body {
 }
 
 /* Layout */
+.nav-link {
+    transition: color 0.3s ease;
+    opacity: 0.7;
+}
+
+.nav-link:hover {
+    color: var(--accent-toxic) !important;
+    opacity: 1;
+}
+
 .app-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -72,7 +82,8 @@ nav a {
     transition: var(--transition);
 }
 
-nav a:hover, nav a.active {
+nav a:hover,
+nav a.active {
     color: var(--accent-toxic);
     text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
 }
@@ -125,14 +136,32 @@ nav a:hover, nav a.active {
     font-size: 0.7rem;
 }
 
-.badge-tech { border: 1px solid var(--accent-cyber); color: var(--accent-cyber); }
-.badge-prod { border: 1px solid var(--accent-toxic); color: var(--accent-toxic); }
-.badge-arch { border: 1px solid var(--accent-crimson); color: var(--accent-crimson); }
+.badge-tech {
+    border: 1px solid var(--accent-cyber);
+    color: var(--accent-cyber);
+}
+
+.badge-prod {
+    border: 1px solid var(--accent-toxic);
+    color: var(--accent-toxic);
+}
+
+.badge-arch {
+    border: 1px solid var(--accent-crimson);
+    color: var(--accent-crimson);
+}
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-fade {
