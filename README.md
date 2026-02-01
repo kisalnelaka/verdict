@@ -1,4 +1,4 @@
-# VERDICT
+# VERDICT: Cognitive Infrastructure
 
 This is not a task tracker. This is not Jira. If you came here looking for a Kanban board, find the nearest exit.
 
@@ -10,85 +10,48 @@ VERDICT is cognitive infrastructure for engineering governance. It exists to ans
 3. **Accountability is memory, not punishment**: We log every override and risk acceptance so we don't repeat our collective stupidity.
 4. **Systems must remember their own failures**: Retrospectives are manual and flawed. Autopsies are deterministic and immutable.
 
-## Phase 1 Implementation: The Core Engine
-We have successfully implemented the skeletal structure of the system:
-- **Relational Persistence**: Decisions, Context Snapshots, Actors, and Outcomes.
-- **Immutable Accountability Ledger**: Every action is recorded in an append-only chain.
-- **SHA-256 Hash Chaining**: Each ledger entry is cryptographically linked to the previous one. Integrity is verifiable.
-- **Rule-based Autopsy Engine**: Automated analysis of outcomes vs. decision-time confidence and ignored objections.
+## System Capabilities
 
-## Running the Infrastructure
+### Phase 1: The Core Engine
+- **Immutable Accountability Ledger**: Every decision, status change, and outcome is recorded in a SHA-256 cryptographically chained ledger.
+- **Context Snapshots**: Decisions are frozen alongside a JSON snapshot of "reality" (knowns, unknowns, risks, and human energy levels).
+- **Rule-based Autopsy Engine**: Automated analysis of outcomes vs. decision-time confidence. Detects "The Arrogance Trap," "Ignored Warnings," and "Blind Spots."
 
-Due to the "creative" constraints of local PHP environments (missing default drivers), a wrapper script `./v` is provided to inject the necessary MySQL extensions.
+### Phase 1.5: Visual Infrastructure
+- **Decision Timeline**: A premium, dark-mode vertical flow of choice and consequence.
+- **Context Inspection**: Deep-dive views into decision snapshots and the cryptographic chain.
+- **Evidence UI**: Direct visualization of linked code changes and architectural drift.
 
-### Manual Decision Entry
-To document a decision and commit it to the immutable ledger:
-```bash
-./v verdict:decision
-```
+### Phase 2: Implementation & Enforcement
+- **Git Linker**: Automatically associates commits with decisions using `[D#]` tags in commit messages.
+- **Architectural Hashing**: Snapshots the repository's directory/file structure at decision-time to detect undocumented evolution.
+- **Governance Enforcement**: CI/CD ready commands to fail builds if undocumented drift is detected or if architectural changes lack linked intent.
 
-### Recording Outcomes
-When reality hits and things break (or succeed):
-```bash
-./v verdict:outcome {decision_id}
-```
+---
 
-### Running Autopsies
-To generate a rule-based report on why an outcome sucked:
-```bash
-./v verdict:autopsy {outcome_id}
-```
+## Operations & CLI
 
-### Verifying Ledger Integrity
-To ensure no one has tampered with the historical records:
-```bash
-./v verdict:verify
-```
+Due to local PHP environment constraints, use the provided `./v` wrapper for all commands.
 
-## Environment Setup: Valet Linux Plus
+### Engineering Governance
+- `verdict:decision`: Interactively document a decision and commit it to the ledger.
+- `verdict:outcome {decision_id}`: Record an impact delta (incident, delay, cost).
+- `verdict:autopsy {outcome_id}`: Run the deterministic analysis engine on a failure.
+- `verdict:verify`: Cryptographically verify the integrity of the entire accountability chain.
 
-To host VERDICT locally using Valet Linux Plus:
+### Integration Workflow
+- `verdict:sync-git`: Scan git history for `[D#]` links and associate evidence with intent.
+- `verdict:enforce`: (CI/CD) Verifies that no undocumented "drift" has occurred since the last decision.
 
-1. **Link the Project**:
-   ```bash
-   valet link verdict
-   ```
+---
 
-2. **Database Provisioning**:
-   ```bash
-   ./v db:seed # Populate with initial intent
-   ```
+## Local Setup: Valet Linux Plus
+1. **Link Project**: `valet link verdict`
+2. **Setup Data**: `./v db:seed`
+3. **Environment**: Ensure `pdo_mysql` and `intl` are enabled (the system should have already handled this via `/etc/php/conf.d/`).
+4. **Access**: [http://verdict.test](http://verdict.test)
 
-3. **PHP Configuration**:
-   I have globally enabled `pdo_mysql` and `intl` in `/etc/php/conf.d/`. If things still look "empty," run `valet restart`.
-
-4. **Access UI**:
-   Open [http://verdict.test](http://verdict.test).
-
-## Phase 2: Integrations & Enforcement
-
-VERDICT now actively monitors your implementation for "Intent Drift."
-
-### 1. Git Integration
-Link your commits to decisions by adding the decision ID in your commit messages:
-`[D1] Implementing the flux capacitor`
-
-Sync the ledger with your code:
-```bash
-./v verdict:sync-git
-```
-
-### 2. Architectural Enforcement
-VERDICT snapshots the repo structure at decision-time. If you add files without documenting the decision, the system flags it as "undocumented drift."
-
-Run enforcement (perfect for CI/CD):
-```bash
-./v verdict:enforce --strict
-```
-
-## Testing & Verification
-Use the provided `./v` (Artisan wrapper) for all operations.
-
+## Verification
 ```bash
 ./v test
 ```
